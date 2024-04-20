@@ -6,7 +6,7 @@ Dead employees will only come back to life once the quota is met. If your entire
 
 ![buddycameback](https://i.imgur.com/hs7VvIq.png)
 
-Not only does this make the game significantly more difficult, it also allows you to store and sell your crewmate's bodies as if they were scrap.
+Not only does this make the game significantly more difficult, it also allows you to store and sell your crewmates' bodies as if they were scrap.
 
 ![mesellingmybuddythatididnotkill](https://i.imgur.com/P4k60CU.png)
 
