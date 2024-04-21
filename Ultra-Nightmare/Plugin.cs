@@ -20,7 +20,7 @@ namespace Ultra_Nightmare
     {
         public const string modGUID = "JS03.Ultra-Nightmare";
         private const string modName = "Ultra-Nightmare";
-        private const string modVersion = "1.0.0";
+        private const string modVersion = "1.0.1";
 
         // Config values
         public static ConfigEntry<bool> automatedMsg;

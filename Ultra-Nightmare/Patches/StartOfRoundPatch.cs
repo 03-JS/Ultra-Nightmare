@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using GameNetcodeStuff;
+using HarmonyLib;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,15 @@ namespace Ultra_Nightmare.Patches
         {
             if (!__instance.isChallengeFile)
             {
+                if (!GameNetworkManager.Instance.localPlayerController.isPlayerDead)
+                {
+                    Plugin.LogToConsole("Healing local player");
+                    GameNetworkManager.Instance.localPlayerController.bleedingHeavily = false;
+                    GameNetworkManager.Instance.localPlayerController.criticallyInjured = false;
+                    GameNetworkManager.Instance.localPlayerController.playerBodyAnimator.SetBool("Limp", false);
+                    GameNetworkManager.Instance.localPlayerController.health = 100;
+                    HUDManager.Instance.UpdateHealthUI(100, hurtPlayer: false);
+                }
                 if (__instance.allPlayersDead)
                 {
                     Plugin.LogToConsole("All players are dead", "warn");
