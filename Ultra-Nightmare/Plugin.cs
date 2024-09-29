@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Bootstrap;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
@@ -10,17 +11,21 @@ namespace Ultra_Nightmare
 {
     [BepInPlugin(modGUID, modName, modVersion)]
     [BepInDependency("BMX.LobbyCompatibility", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("lacrivoca.DeathQuota", BepInDependency.DependencyFlags.SoftDependency)]
     [LobbyCompatibility(CompatibilityLevel.Everyone, VersionStrictness.Patch)]
     internal class Plugin : BaseUnityPlugin
     {
         public const string modGUID = "JS03.Ultra-Nightmare";
         private const string modName = "Ultra-Nightmare";
-        private const string modVersion = "1.0.1";
+        private const string modVersion = "1.0.3";
 
         // Config values
         public static ConfigEntry<bool> automatedMsg;
         // public static ConfigEntry<bool> permaDeath;
         // public static ConfigEntry<float> automatedMsgDelay;
+
+        // DeathQuota compat
+        public static bool deathQuotaInstalled;
 
         private readonly Harmony harmony = new Harmony(modGUID);
         private static Plugin Instance;
@@ -35,6 +40,8 @@ namespace Ultra_Nightmare
 
             mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
             mls.LogInfo("Ultra-Nightmare is up and running");
+            
+            // Start of config
 
             //permaDeath = Config.Bind(
             //    "Ultra-Nightmare", // Config section
@@ -56,6 +63,10 @@ namespace Ultra_Nightmare
             //    8f, // Default value
             //    "Applies a delay to the automated message" // Description
             //);
+
+            // End of config
+
+            deathQuotaInstalled = Chainloader.PluginInfos.ContainsKey("lacrivoca.DeathQuota");
 
             PatchStuff();
         }

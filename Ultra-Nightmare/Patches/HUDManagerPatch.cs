@@ -1,6 +1,5 @@
-﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
+﻿using BepInEx.Bootstrap;
+using HarmonyLib;
 
 namespace Ultra_Nightmare.Patches
 {
@@ -22,8 +21,9 @@ namespace Ultra_Nightmare.Patches
 
         [HarmonyPatch("ApplyPenalty")]
         [HarmonyPrefix]
-        static bool PreventPenalty()
+        static bool ApplyPenalty()
         {
+            if (Plugin.deathQuotaInstalled) return true;
             return false;
         }
 
@@ -31,7 +31,7 @@ namespace Ultra_Nightmare.Patches
         [HarmonyPostfix]
         static void DisableHUDObject()
         {
-            HUDManager.Instance.statsUIElements.penaltyTotal.transform.parent.parent.gameObject.SetActive(false);
+            HUDManager.Instance.statsUIElements.penaltyTotal.transform.parent.parent.gameObject.SetActive(Chainloader.PluginInfos.ContainsKey("lacrivoca.DeathQuota"));
         }
     }
 }
